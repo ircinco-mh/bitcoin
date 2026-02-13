@@ -31,7 +31,7 @@ defaults:
 jobs:
   runners:
     name: '[meta] determine runners'
-    runs-on: ubuntu-slim
+    runs-on: self-hosted
     outputs:
       provider: ${{ steps.runners.outputs.provider }}
     steps:
@@ -116,7 +116,7 @@ jobs:
     name: ${{ matrix.job-name }}
     # Use any image to support the xcode-select below, but hardcode version to avoid silent upgrades (and breaks).
     # See: https://github.com/actions/runner-images#available-images.
-    runs-on: macos-15
+    runs-on: self-hosted
 
     # When a contributor maintains a fork of the repo, any pull request they make
     # to their own fork, or to the main repository, will trigger two CI runs:
@@ -204,7 +204,7 @@ jobs:
 
   windows-native-dll:
     name: ${{ matrix.job-name }}
-    runs-on: windows-2025-vs2026
+    runs-on: self-hosted
 
     if: ${{ vars.SKIP_BRANCH_PUSH != 'true' || github.event_name == 'pull_request' }}
 
@@ -385,7 +385,7 @@ jobs:
 
   windows-native-test:
     name: 'Windows, ${{ matrix.crt }}, test cross-built'
-    runs-on: windows-2022
+    runs-on: self-hosted
     needs: [windows-cross, record-frozen-commit]
 
     strategy:
